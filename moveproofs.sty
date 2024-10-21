@@ -111,7 +111,11 @@
 % Example usage: \appendixproof{theorem_one}
 \DeclareDocumentCommand{\appendixproof}{s m}{
 \ifmoveproofstoappendix
-    \subsection{\protect\MPGetTitle{#2}}\label{#2_proof}
+    \IfPackageLoadedTF{hyperref}{
+        \subsection{\texorpdfstring{\protect\MPGetTitle{#2}}{\autoref{#2}}}
+    }{
+        \subsection{\protect\MPGetTitle{#2}}
+    }\label{#2_proof}
     \IfBooleanTF{#1}{
         \MPGetProof{#2}%
     }{
