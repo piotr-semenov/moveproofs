@@ -111,6 +111,9 @@
 % Example usage: \appendixproof{theorem_one}
 \DeclareDocumentCommand{\appendixproof}{s m}{
 \ifmoveproofstoappendix
+    % If MP title contains hyperref link to reference that cannot be resolved at early runs
+    % of pdftex then pdftex will fail while compiling table of contents.
+    % Checked for Tex Live 2026.
     \IfPackageLoadedTF{hyperref}{
         \subsection{\texorpdfstring{\protect\MPGetTitle{#2}}{\autoref{#2}}}
     }{
